@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # Python program to display all the prime numbers within an interval
 
+
+#inicio de programa
 lower = 1
 upper = 500
 
@@ -13,4 +15,4 @@ for num in range(lower, upper + 1):
            if (num % i) == 0:
                break
        else:
-           print(num)
+           print(num) #Muestra los resultados 
