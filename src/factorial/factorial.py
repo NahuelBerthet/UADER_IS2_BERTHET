@@ -25,33 +25,49 @@ def factorial(num):
 
 def obtener_rango(entrada):
     try:
-        partes = entrada.split("-")
-        if len(partes) == 2:
+        # -hasta
+        if entrada.startswith("-"):
+            fin = int(entrada[1:])
+            return 1, fin
+        
+        # desde-
+        if entrada.endswith("-"):
+            inicio = int(entrada[:-1])
+            return inicio, 60
+        
+        # desde-hasta
+        if "-" in entrada:
+            partes = entrada.split("-")
             inicio = int(partes[0])
             fin = int(partes[1])
             return inicio, fin
-        else:
-            # Si solo se pasa un numero
-            num = int(entrada)
-            return num, num
+        
+        # Caso número unico
+        num = int(entrada)
+        return num, num
+    
     except ValueError:
-        print("Entrada invalida. Debe ser un numero o un rango desde-hasta (ej. 4-8).")
+        print("Entrada inválida. Debe ser un número o un rango válido (ej. 4-8, -10, 20-).")
         sys.exit()
 
-# Pedir argumento 
+# Pedir argumento
 if len(sys.argv) < 2:
-    entrada = input("Ingrese un numero o un rango (ej. 4-8): ")
+    entrada = input("Ingrese un número o un rango (ej. 4-8, -10, 20-): ")
 else:
     entrada = sys.argv[1]
 
 inicio, fin = obtener_rango(entrada)
+
+# Validar
+if inicio > fin:
+    print("El rango es inválido: el inicio no puede ser mayor que el fin.")
+    sys.exit()
 
 # Calcular factoriales en el rango
 for n in range(inicio, fin + 1):
     resultado = factorial(n)
     if resultado is not None:
         print(f"Factorial {n}! es {resultado}")
-
 
 #* codigo viejo
 # if len(sys.argv) < 0: 
